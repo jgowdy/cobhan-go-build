@@ -16,7 +16,7 @@ RUN abuild-keygen -a -n
 WORKDIR /home/build
 
 # Shallow clone the aports repo to get the abuild files
-RUN git clone --depth 1 --branch v3.14.1 --single-branch https://github.com/alpinelinux/aports.git
+RUN git clone --depth 1 --branch v3.14.2 --single-branch https://github.com/alpinelinux/aports.git
 
 # Copy the patched abuild files to /home/build/aports/main/gcc
 COPY /0042-no-args.patch /APKBUILD /home/build/aports/main/gcc/
