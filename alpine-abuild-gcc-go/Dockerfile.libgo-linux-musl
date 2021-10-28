@@ -18,14 +18,11 @@ WORKDIR /home/build
 # Shallow clone the aports repo to get the abuild files
 RUN git clone --depth 1 --branch v3.14.1 --single-branch https://github.com/alpinelinux/aports.git
 
-# Copy the repo from the cobhan-clone container
-COPY --from=cobhan-clone /cobhan /cobhan
+# Copy the patched abuild files to /home/build/aports/main/gcc
+COPY /0042-no-args.patch /APKBUILD /home/build/aports/main/gcc/
 
 # Move to the gcc aports directory to build gcc apks
 WORKDIR /home/build/aports/main/gcc
-
-# Copy the patched abuild files from the cobhan repo to /home/build/aports/main/gcc
-RUN cp /cobhan/alpine-abuild-gcc/* .
 
 # Build the apk files using abuild
 RUN LANG_CXX=0 LANG_D=0 LANG_OBJC=0 LANG_FORTRAN=0 LANG_ADA=0 abuild -K -s /home/build/src
