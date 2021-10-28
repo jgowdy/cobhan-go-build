@@ -32,3 +32,5 @@ FROM docker.io/alpine AS alpine-gccgo
 COPY --from=alpine-gccgo-apk-build /home/build/packages/main/x86_64/*.apk /packages/
 
 RUN apk add --allow-untrusted /packages/*.apk
+
+RUN apk update
