@@ -1,4 +1,4 @@
-FROM docker.io/alpine AS alpine-gccgo-apk-build
+FROM docker.io/alpine:3.14.1 AS alpine-gccgo-apk-build
 
 # Install build dependencies
 RUN apk add git vim make automake autoconf gmp gmp-dev mpfr mpfr-dev mpc mpc1-dev flex abuild bison texinfo gawk zip zlib-dev libucontext-dev gcc-gnat-bootstrap linux-headers isl-dev build-base
@@ -16,7 +16,7 @@ RUN abuild-keygen -a -n
 WORKDIR /home/build
 
 # Shallow clone the aports repo to get the abuild files
-RUN git clone --depth 1 --branch v3.14.2 --single-branch https://github.com/alpinelinux/aports.git
+RUN git clone --depth 1 --branch v3.14.1 --single-branch https://github.com/alpinelinux/aports.git
 
 # Copy the patched abuild files to /home/build/aports/main/gcc
 COPY /0042-no-args.patch /APKBUILD /home/build/aports/main/gcc/
